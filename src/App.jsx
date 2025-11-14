@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Dashboard from "./pages/Dashboard";
 import Counter from "./pages/Counter";
@@ -15,6 +15,7 @@ function App() {
         <Navbar />
         <main className="flex-1 py-8">
           <Routes>
+            <Route path="/" element={<Navigate to="/dashboard" />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/counter" element={<Counter />} />
             <Route path="/todo" element={<Todo />} />
