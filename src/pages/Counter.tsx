@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 
 const STORAGE_KEY = "pd_counter_value";
 
-export default function Counter() {
+export default function Counter(): JSX.Element {
   // load initial from localStorage (if present)
-  const [count, setCount] = useState(() => {
+  const [count, setCount] = useState<number>(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       return raw !== null ? JSON.parse(raw) : 0;
@@ -22,7 +22,7 @@ export default function Counter() {
 
   // keyboard shortcuts: + increments, - decrements, r resets
   useEffect(() => {
-    function onKey(e) {
+    function onKey(e: KeyboardEvent): void {
       if (e.key === "+" || e.key === "=") setCount(c => c + 1);
       if (e.key === "-") setCount(c => c - 1);
       if (e.key.toLowerCase() === "r") {
@@ -33,13 +33,13 @@ export default function Counter() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  const increment = () => setCount(c => c + 1);
-  const decrement = () => setCount(c => c - 1);
-  const reset = () => {
+  const increment = (): void => setCount(c => c + 1);
+  const decrement = (): void => setCount(c => c - 1);
+  const reset = (): void => {
     if (confirm("Are you sure you want to reset the counter?")) setCount(0);
   };
 
-  const add = (n) => setCount(c => c + n);
+  const add = (n:number): void => setCount(c => c + n);
 
   return (
     <div className="max-w-3xl mx-auto p-6">
